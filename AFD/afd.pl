@@ -106,4 +106,4 @@ if ($estado == 3){
      print "|                Cadena Valida ;)                    |\n";
     print "+----------------------------------------------------+\n";
 }    
-print "\n\n"
+print "\n\n";
