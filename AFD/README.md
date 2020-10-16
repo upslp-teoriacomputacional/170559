@@ -20,4 +20,5 @@ En la parte donde se validaba si era el fin de la cadena me daba un error ya que
 La solucion fue usar la funcion "chomp()" que tiene perl por default y lo que hace es que a leer a cadena quita ese salto de linea y ahora el programa puede funcionar bien.
 ```Perl
 chomp(my $cadena = <STDIN>);
+
 ```
