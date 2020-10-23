@@ -24,7 +24,11 @@ despues entre los corchetes y con comillas ponemos el nombre de nuestra Key, dep
 ```Perl
     $tokens{'DATATYPE'} = $word;
 ```
-
+Otro problema fue tratar como un array al string $word mi solucion fue hacer un arrego con esta ultima palabra que analiza el programa y asi sacar el tamaño con la función scalar y tomar ese tamaño -1 para para ver si contenia el caracter ';', esta fue la forma en que funciono mi codigo.
+```Perl
+my @wd = $word;		 	
+if($wd[scalar(@wd)-1] =~ m/;/){.....}
+```
 ## Código
 
 ```Perl
