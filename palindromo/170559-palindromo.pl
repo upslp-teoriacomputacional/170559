@@ -3,18 +3,15 @@
 #/* *****************************************************************
 # *  Name:    Espinoza Escamilla David
 # *	 Matricula : 170559	
-# *  Description: expresion regular
+# *  Description: palindromos
 # *
 # *  Written:       03/11/2020
-# *  Last updated:  04/11/2020
+# *  Last updated:  06/11/2020
 # *
-#*
 # ***************************************************************** */
-
 
 use strict;
 use warnings;
-
 
 print "+-------------------------------------+\n";
 print "|    Ingrese una cadena a evaluar:    |\n";
@@ -27,31 +24,44 @@ $cadena =~ s/\s//g;
 $cadena =~ tr/A-Z/a-z/;
 #
 my @palindromo = split //,$cadena;
+my @re = reverse @palindromo;
 
-#subrutina que valida si la palabra es palindromo
-
-
-sub pald{	
-	#se igual otro array con ordeen inverso a otro array
-	my @re = reverse(@palindromo); 
+#subrutina que valida si los caracteres son iguales 
+sub igual{
+	my ($a,$b)=@_;
 	
-	my $cont = 0;	
-	#se recorre cada elemento
-	for(@palindromo){
-		#si en alguna parte no coincide entonces no es palidromo 
-		#y se retorna 0
-		if ($palindromo[$cont] ne $re[$cont]){
-				return 0;
-		}
-		$cont+=1;
+	if( $a eq $b){
+		return 0;
+	}else{
+		return 1;
 	}
-	#si la palabra es palindromo retornamos 1
-	return 1;
 }
-	
-if (&pald == 1){
-	print "La palabra $cadena es un palindromo";
+#tabla realizada con mi compañero Loredo Benjamin
+#tabla de estados del automata
+my $tabla = [[0,1,0],[1,1,1]];
+my $estado = 0;
+my $estadosig = 0;
+
+if (scalar @palindromo == 0){
+	print "Cadena vacia \n";
 }else{
-	print "La palabra $cadena  no es un palindromo";
+	while(scalar @palindromo != 0){
+		$estadosig = $estado;
+		#se usa pop para sacar un carater y que nos diga cual fue
+		my $car1 = pop(@palindromo);
+		my $car2 = pop(@re);
+		my $comp = igual($car1,$car2);
+		$estado=$tabla->[$estado][$comp];
+		
+		#Si es palindromo 
+        if($estado==1){                 
+          print "   No es un palindromo      \n";		  
+          exit();
+        }       
+      }
+      # No es palindromo
+      if ($estado == 0){
+		  print "   Es un palindromo      \n";		
+	  }	
 }
 
